@@ -9,6 +9,7 @@ djangorestframework = "*"
 djongo = "*"
 python-dotenv = "*"
 pymongo = {extras = ["srv"], version = "*"}
+gunicorn = "*"
 
 [dev-packages]
 
