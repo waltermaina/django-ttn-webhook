@@ -1,0 +1,1 @@
+web: gunicorn DjangoTTNWebhook.wsgi --log-file -
