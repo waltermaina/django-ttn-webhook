@@ -5,6 +5,10 @@ name = "pypi"
 
 [packages]
 django = "*"
+djangorestframework = "*"
+djongo = "*"
+python-dotenv = "*"
+pymongo = {extras = ["srv"], version = "*"}
 
 [dev-packages]
 

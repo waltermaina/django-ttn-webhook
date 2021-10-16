@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-51dh5z_v0pb@*$k6l^fbl&4cm8vy)s)=2*88sfq@5*+026&c#y'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Django REST framework 
+    'rest_framework',
+    # REST API application 
+    'rest_api.apps.RestApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -75,9 +81,13 @@ WSGI_APPLICATION = 'DjangoTTNWebhook.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+            'ENGINE': 'djongo',
+            'NAME': os.getenv("DATABASE_NAME"),
+            'ENFORCE_SCHEMA': False,
+            'CLIENT': {
+                'host': os.getenv("DATABASE_HOST")
+            }  
+        }
 }
 
 
