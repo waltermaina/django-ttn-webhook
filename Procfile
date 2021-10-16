@@ -1,1 +1,1 @@
-web: gunicorn DjangoTTNWebhook.DjangoTTNWebhook.wsgi --log-file -
+web: gunicorn DjangoTTNWebhook.wsgi --log-file -
