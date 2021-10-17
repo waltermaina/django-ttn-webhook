@@ -21,6 +21,7 @@ class ListData(APIView):
     def post(self, request, format=None):
         # extract data from TTN JSON object
         ttn_webhook_data = request.data
+        print("ttn_webhook_data: ",ttn_webhook_data)
 
         # Check if it is uplink data
         if "data" in ttn_webhook_data:
