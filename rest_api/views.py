@@ -24,7 +24,7 @@ class ListData(APIView):
         print("ttn_webhook_data: ",ttn_webhook_data)
 
         # Check if it is uplink data
-        if "uplink_message" in ttn_webhook_data:
+        if "decoded_payload" in str(ttn_webhook_data):
             raw_uplink_data = ttn_webhook_data
             uplink_message = raw_uplink_data["uplink_message"]
             #print(uplink_message)
