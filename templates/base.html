@@ -1,0 +1,46 @@
+<!-- templates/base.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}BME680 Sensor Project{% endblock %}</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a href="{% url 'home' %}" class="navbar-brand">BME680 DATA</a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav">
+            <a href="{% url 'home' %}" class="nav-item nav-link">Temperature</a>
+            <a href="{% url 'humidity' %}" class="nav-item nav-link">Humidity</a>
+            <a href="{% url 'pressure' %}" class="nav-item nav-link">Pressure</a>
+            <a href="{% url 'air_quality' %}" class="nav-item nav-link">Air Quality</a>
+            <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+            <a href="{% url 'contactus' %}" class="nav-item nav-link">Contact Us</a>
+            <!--<a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a>-->
+        </div>
+        <div class="navbar-nav ml-auto">
+            <!--<a href="/admin" class="nav-item nav-link">Login</a>-->
+        </div>
+    </div>
+</nav>
+
+  {% block content %}{% endblock %}
+
+</body>
+{# The Footer #}
+    <footer class="footer">
+	    <div class="container-fluid">
+	        <div class="row text-center">
+	            <div class="col-12">Copyright©2020 <a href="https://sites.google.com/view/ndovusoftwareengineering" rel="noopener noreferrer" target="_blank">Ndovu Software Engineering</a></div>
+	        </div>
+	    </div>        
+	</footer>
+</html>

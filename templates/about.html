@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>About</h2>
+    		<h3>DHT11 and Django project</h3>
+    		<p>I created this project so that it could help me put into practice skills that I had learnt about:
+    		Heroku, Django, Git, Bootstrap, REST, Python, ESP8266 wifi module, DHT11 temperature and humidity sensor, Arduino and SQLite.</p>
+    		<p>In this project, temperature and humidity are measured using a DHT11 sensor which is connected to an esp8266 module. The esp8266 module sends the data to a django rest api which validates and stores the data in a SQLite database. A front end app in the django project then displays the data using two graphs: one for temperature and the other for humidity.</p>
+        </div>
+     </div>     
+</div>
+{% endblock %}>

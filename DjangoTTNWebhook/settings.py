@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     # REST API application 
     'rest_api.apps.RestApiConfig',
+    # Front End application 
+    'front_end_app.apps.FrontEndAppConfig',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +62,7 @@ ROOT_URLCONF = 'DjangoTTNWebhook.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
