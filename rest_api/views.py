@@ -7,7 +7,37 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 import datetime
+import requests
+import json
 
+HTTP_400_BAD_REQUEST = "NDAw"
+HTTP_201_CREATED = "MjAx"
+
+def queue_downlink_acknowledgement(status_code):
+    """
+        Sends a downlink message to the device as a way of
+        acknowledging that data was received by the webhook.
+    """
+    
+    url = 'https://eu1.cloud.thethings.network/api/v3/as/applications/ttn-webhook-application/webhooks/heroku-ttn-webhook/devices/eui-70b3d57ed00466e5/down/push'
+    body = {
+        "downlinks": [
+            {
+                "frm_payload": status_code,
+                "f_port": 15,
+                "priority": "NORMAL"
+            }
+        ]
+    }
+
+    headers = {'Authorization': 'Bearer NNSXS.DATPDITZQ6N5D7S6NSJSKC7YH4V7L6MRLGXCL4Y.AJP3JREGMCZULKKZOWRJZPUTUW4FCCJAQVOKELXCQEDQN3IAVQCA',
+               'content-type': 'application/json',
+               'User-Agent': 'heroku-ttn-webhook/1.0.0'
+              }
+
+    r = requests.post(url, data=json.dumps(body), headers=headers)
+
+    print("Downlink Message Queue Response: ", r)
 
 class ListData(APIView):
     """
@@ -38,6 +68,7 @@ class ListData(APIView):
 
             # Return if there is error in data
             if(decoded_payload_errors):
+                queue_downlink_acknowledgement(HTTP_400_BAD_REQUEST)
                 message = decoded_payload_errors[0]
                 return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
@@ -59,9 +90,12 @@ class ListData(APIView):
             serializer = serializers.EnvironmentDataSerializer(data=decoded_payload_data)
             if serializer.is_valid():
                 serializer.save()
+                queue_downlink_acknowledgement(HTTP_201_CREATED)
                 return Response(serializer.data, status=status.HTTP_201_CREATED) 
+            queue_downlink_acknowledgement(HTTP_400_BAD_REQUEST)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
+            queue_downlink_acknowledgement(HTTP_400_BAD_REQUEST)
             message = "Incorrect json object received."
             return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
