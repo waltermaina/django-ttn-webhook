@@ -85,6 +85,8 @@ class ListData(APIView):
             hour = new_time.hour
             new_record_id = str(year)+str(month)+str(day)+str(hour)
             decoded_payload_data['record_id'] = int(new_record_id)
+            print("Record ID: ", decoded_payload_data['record_id'])
+            #print("Record: ", decoded_payload_data)
 
             # Save record and send a response    
             serializer = serializers.EnvironmentDataSerializer(data=decoded_payload_data)
